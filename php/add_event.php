@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /*var_dump($_POST);
 die();*/
 
@@ -14,19 +14,20 @@ if(isset($_POST)) {
   $city           = $_POST['city'];
   $zip_code       = $_POST['zip_code'];
   $url            = $_POST['url'];
-  $user_id        = 'user_id';
-  $created_at     = 'created_at';
-  $updated_at     = 'updated_at';
-  $published_at   = 'published_at';
+  $user_id        = $_SESSION['user']['id'];
+
+echo $title.' DESCRPTION'.$description.' COMMENCE '.$start_at.' SE TERMINE'.$end_at.' LIEU'.$address.' VILLE'.$city.' CODE POSTAL'.$zip_code.' URL'.$url.' USER ID'.$user_id;
+
+var_dump($_SESSION['user']);
 
   //On connecte la DB
   include_once('db.php');
 
   //On sollicite la base de données
   $sql = "INSERT INTO events (title, description, start_at, end_at, address, city,
-     zip_code, created_at, updated_at, url, user_id, published_at)
+     zip_code, created_at, url, user_id)
   VALUES ( :title, :description, :start_at, :end_at, :address, :city,
- :zip_code, :created_at, :updated_at, :url, :user_id, :published_at)";
+ :zip_code, NOW(), :url, :user_id)";
 
   $stmt = $connexion->prepare($sql);
 
@@ -34,16 +35,13 @@ if(isset($_POST)) {
 
     'title'              => $title,
     'desription'         => $description,
-    'start_at'           => date('Y-m-d H:i:s'),
-    'end_at'             => date('Y-m-d H:i:s'),
+    'start_at'           => $_POST['start_at'],
+    'end_at'             => $_POST['end_at'],
     'address'            => $address,
     'city'               => $city,
     'zip_code'           => $zip_code,
-    'created_at'         => date('Y-m-d H:i:s'),
-    'updated_at'         => date('Y-m-d H:i:s'),
     'url'                => $url,
-    'user_id'            => $user_id,
-    'published_at'       => $published_at,
+    'user_id'            => $user_id
 
   ]);
 
@@ -79,6 +77,7 @@ if(isset($_POST)) {
 
 
   //On redirige
-  //header('Location: events.php');
+  die();
+  header('Location: ../events.php');
   unset($db);
 }

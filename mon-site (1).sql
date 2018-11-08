@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Nov 06, 2018 at 10:39 AM
+-- Generation Time: Nov 08, 2018 at 03:44 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.8
 
@@ -51,11 +51,9 @@ CREATE TABLE `events` (
   `phone` bigint(10) DEFAULT NULL,
   `zip_code` int(5) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
   `url` text,
-  `user_id` int(11) NOT NULL,
-  `published_at` datetime NOT NULL,
-  `commentId` int(11) NOT NULL
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -72,6 +70,15 @@ CREATE TABLE `users` (
   `created_at` date NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `updated_at`) VALUES
+(1, 'fdxgfchvgjbn', 'dxfcghv@sdxfc.de', '1c2e4eb66925525e311b9c636b1f6a5c', '2018-11-08', '2018-11-08 14:13:27'),
+(2, 'jeannot', 'jeannotlapin@carotte.com', 'ab4f63f9ac65152575886860dde480a1', '2018-11-08', '2018-11-08 14:23:20'),
+(3, 'boby', 'boby@boby.boby', 'cdaa6716746fb685734abde87f1b08ad', '2018-11-08', '2018-11-08 14:28:50');
 
 --
 -- Indexes for dumped tables
@@ -115,7 +122,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

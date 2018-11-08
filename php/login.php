@@ -6,6 +6,7 @@
 if(isset($_POST)){
     $email    = $_POST['email'];
     $password = $_POST['password'];
+    $password = hash('md5', $password);
 }
 
 
@@ -15,10 +16,11 @@ require("db.php");
 
         $sql = "SELECT *
                 FROM users
-                WHERE email = :email";
+                WHERE email = :email AND password = :password";
 
         $stmt = $connexion->prepare($sql);
         $stmt ->bindValue(":email", $email);
+        $stmt ->bindValue(":password", $password);
         $stmt->execute();
         $user = $stmt->fetch();
 
