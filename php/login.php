@@ -27,4 +27,7 @@ if(isset($user)) {
     //Alors on vérifie son mot de passe
       session_start();
       $_SESSION['user'] = $user;
+
+// On redirige l'utilisateur      
+header('Location: ../');
 }
