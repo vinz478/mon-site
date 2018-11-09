@@ -1,19 +1,15 @@
 <?php
+include_once('php/db.php');
 
-include_once('php/db.php')
 
-if(isset($user_id))
-    $id = $user_id
+if(isset($_GET['user_id'])){
+  $id = $_GET['user_id'];
+} else {
+  $id = $_SESSION['user']['id'];
+}
 
-$sql = 'SELECT * FROM users
-        WHERE id = $_SESSION['id']';
 
+$sql = "SELECT * FROM users WHERE id = $id";
 $stmt = $connexion->prepare($sql);
 $stmt->execute();
-$user=$stmt->fetchAll();
-
-var_dump($user);
-die();
-
-
- ?>
+$user=$stmt->fetch();

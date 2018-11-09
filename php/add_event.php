@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 /*var_dump($_POST);
@@ -16,37 +17,30 @@ if(isset($_POST)) {
   $url            = $_POST['url'];
   $user_id        = $_SESSION['user']['id'];
 
-echo $title.' DESCRPTION'.$description.' COMMENCE '.$start_at.' SE TERMINE'.$end_at.' LIEU'.$address.' VILLE'.$city.' CODE POSTAL'.$zip_code.' URL'.$url.' USER ID'.$user_id;
-
-var_dump($_SESSION['user']);
-
   //On connecte la DB
   include_once('db.php');
 
   //On sollicite la base de données
   $sql = "INSERT INTO events (title, description, start_at, end_at, address, city,
-     zip_code, created_at, url, user_id)
-  VALUES ( :title, :description, :start_at, :end_at, :address, :city,
- :zip_code, NOW(), :url, :user_id)";
-
+                      zip_code, created_at, url, user_id)
+          VALUES      (:title, :description, :start_at, :end_at, :address, :city,
+                      :zip_code, :created_at, :url, :user_id)";
   $stmt = $connexion->prepare($sql);
-
   $stmt->execute([
-
     'title'              => $title,
-    'desription'         => $description,
+    'description'        => $description,
     'start_at'           => $_POST['start_at'],
     'end_at'             => $_POST['end_at'],
     'address'            => $address,
     'city'               => $city,
     'zip_code'           => $zip_code,
     'url'                => $url,
-    'user_id'            => $user_id
-
+    'user_id'            => $user_id,
+    'created_at'         => date('Y-m-d H:i:s'),
   ]);
 
-//echo "ça fonctionne";
-//die();
+
+
   //Traitement des erreurs
   if (!$_POST['title']){
   $_SESSION['errors']['title']       = 'Entrez le nom de l\'événement';
@@ -73,11 +67,9 @@ var_dump($_SESSION['user']);
   }
 
 
-
-
-
   //On redirige
-  die();
-  header('Location: ../events.php');
+
+  header('Location: ../events.php);
   unset($db);
+
 }

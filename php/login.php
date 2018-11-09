@@ -30,6 +30,6 @@ if(isset($user)) {
       session_start();
       $_SESSION['user'] = $user;
 
-// On redirige l'utilisateur      
+// On redirige l'utilisateur
 header('Location: ../');
 }
